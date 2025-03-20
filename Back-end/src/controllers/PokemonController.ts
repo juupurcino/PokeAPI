@@ -1,17 +1,23 @@
-import { Request, Response } from "express";
-import PokemonService from "../services/pokemonService.ts"
+import { Request, Response } from 'express';
+import captureService from '../services/captureService.ts';
 
+class PokemonController {
+  async capture(req: Request, res: Response) {
+    const { id } = req.body;
 
-class PokemonController{
-    static async captureCharacter(req: Request, res: Response): Promise<any> {
-
-        if(PokemonService.captureCharacter)
-        return res.status(201).json();
+    try {
+      const capturedPokemon = await captureService.capturePokemon(id);
+      if (capturedPokemon === false) {
+        res.status(400).json({ message: 'Falha na captura!' });
+      } else if (capturedPokemon === null) {
+        res.status(200).json({ message: 'Pokémon escapou!' });
+      } else {
+        res.status(200).json({ message: 'Pokémon capturado com sucesso!', pokemon: capturedPokemon });
+      }
+    } catch (error) {
+      res.status(500).json({ message: 'Erro no servidor!', error: error });
     }
-
-    static async getTeam(req: Request, res: Response): Promise<any> {
-
-    }
+  }
 }
 
-export default PokemonController;
+export default new PokemonController();

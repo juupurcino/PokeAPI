@@ -1,13 +1,10 @@
 import Image from "next/image";
 
-export const Card = ({imagem, nome, specie, type, Weight, Height} : {
+export const CardNome = ({imagem, nome} : {
 
     imagem: string;
     nome: string;
-    specie: string;
-    type : string;
-    Height: string;
-    Weight : string;
+
 }) => {
 
     return (
@@ -19,11 +16,6 @@ export const Card = ({imagem, nome, specie, type, Weight, Height} : {
             </div>
             <div className="bg-gray-800 rounded-b-2xl p-2">
                 <h2 className="font-bold text-white text-2xl m-1">{nome}</h2>
-                <h2 className="font-bold text-yellow-500 m-1">{specie} | {type}</h2>
-                <h2 className="font-bold text-white m-1">Height:</h2>
-                <h2 className="font-bold text-yellow-500 m-1">{Height}</h2>
-                <h2 className="font-bold text-white m-1">Weight:</h2>
-                <h2 className="font-bold text-yellow-500 m-1">{Weight}</h2>
             </div>
         </div>
 
